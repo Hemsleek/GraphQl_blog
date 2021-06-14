@@ -1,6 +1,17 @@
 import React, { useState } from 'react'
+import { useLazyQuery,gql } from '@apollo/client'
 
+const ADD_BOOK = gql`
+  mutation addBook(){
+    addBook{
+      
+    }
+  }
+`
 const NewBook = (props) => {
+
+  const [getBooks, info] = useLazyQuery()
+
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
