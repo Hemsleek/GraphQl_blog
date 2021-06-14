@@ -15,12 +15,12 @@ const Books = (props) => {
       <table>
         <tbody>
           <tr>
-            <th></th>
+            <th>Name</th>
             <th>
-              author
+              Author
             </th>
             <th>
-              published
+              Published
             </th>
           </tr>
           {books.map(a =>
