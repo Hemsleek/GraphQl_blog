@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
-import { useLazyQuery,gql } from '@apollo/client'
+import { useMutation,gql } from '@apollo/client'
 
 const ADD_BOOK = gql`
-  mutation addBook(){
-    addBook{
-      
+  mutation addBook($title:String!,
+        $published:Int!,
+        $author:String!,
+        $genres:[String]!){
+    addBook(
+      title:$title,
+      published:$published,
+      author:$author,
+      genres:$genres
+    ){
+      title
+      author
+      published
     }
   }
 `
 const NewBook = (props) => {
 
-  const [getBooks, info] = useLazyQuery()
+  const [addBook] = useMutation(ADD_BOOK)
 
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -26,6 +36,7 @@ const NewBook = (props) => {
     event.preventDefault()
     
     console.log('add book...')
+    addBook({variables:{title, author, published,genres:genres.concat(genre)}})
 
     setTitle('')
     setPublished('')
