@@ -25,6 +25,7 @@ const Authors = (props) => {
   </div>)
   
   return (
+    <>
     <div>
       <h2>authors</h2>
       <table>
@@ -49,6 +50,25 @@ const Authors = (props) => {
       </table>
 
     </div>
+    <form>
+       <div>
+          Name
+          <input
+            value={name}
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </div>
+        <div>
+          Born
+          <input
+            value={born}
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </div>
+        <button type='submit'>update author</button>
+        
+    </form>
+    </>
   )
 }
 
