@@ -23,7 +23,9 @@ const ALL_AUTHORS = gql`
 
 const Authors = (props) => {
   const result = useQuery(ALL_AUTHORS)
-  const [editAuthor] = useMutation(EDIT_AUTHOR)
+  const [editAuthor] = useMutation(EDIT_AUTHOR,{
+    refetchQueries:[{query:ALL_AUTHORS}]
+  })
 
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
@@ -41,7 +43,7 @@ const Authors = (props) => {
 const updateAuthor = async (event) => {
   event.preventDefault()
   
-  editAuthor({variables:{ name, born}})
+  editAuthor({variables:{ name, born:parseInt(born,10)}})
 
   setName('')
   setBorn('')
