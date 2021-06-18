@@ -20,10 +20,13 @@ const ADD_BOOK = gql`
     }
   }
 `
-const NewBook = (props) => {
+const NewBook = ({show, setError}) => {
 
   const [addBook] = useMutation(ADD_BOOK,{
-    refetchQueries:[{query:ALL_BOOKS}]
+    refetchQueries:[{query:ALL_BOOKS}],
+    onError:(error) => {
+      setError(error.graphQLErrors[0].message)
+    }
   })
 
   const [title, setTitle] = useState('')
@@ -32,7 +35,7 @@ const NewBook = (props) => {
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
 
-  if (!props.show) {
+  if (!show) {
     return null
   }
 
