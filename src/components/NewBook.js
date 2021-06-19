@@ -42,7 +42,7 @@ const NewBook = ({show, setError}) => {
   const submit = async (event) => {
     event.preventDefault()
     
-    addBook({variables:{title, author, published,genres:genres.concat(genre)}})
+    addBook({variables:{title, author, published:parseInt(published,10),genres:genres.concat(genre)}})
 
     setTitle('')
     setPublished('')
