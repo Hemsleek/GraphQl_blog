@@ -20,15 +20,15 @@ const ADD_BOOK = gql`
     }
   }
 `
-const NewBook = ({show, setError}) => {
+const NewBook = ({show, setError,errorM}) => {
 
   const [addBook] = useMutation(ADD_BOOK,{
     refetchQueries:[{query:ALL_BOOKS}],
     onError:(error) => {
-      setError(error.graphQLErrors[0].message)
+      setError(error.networkError.message)
     }
   })
-
+  console.log({errorM})
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
@@ -42,13 +42,8 @@ const NewBook = ({show, setError}) => {
   const submit = async (event) => {
     event.preventDefault()
     
-    addBook({variables:{title, author, published:parseInt(published,10),genres:genres.concat(genre)}})
+    addBook({variables:{title:title? title : null, author, published:parseInt(published,10),genres:genres.concat(genre)}})
 
-    setTitle('')
-    setPublished('')
-    setAuthor('')
-    setGenres([])
-    setGenre('')
   }
 
   const addGenre = () => {

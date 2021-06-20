@@ -13,7 +13,7 @@ const App = () => {
     setTimeout((
         setError(null)
     )
-    ,2000)
+    ,5000)
   }
 
   return (
@@ -36,6 +36,7 @@ const App = () => {
       <NewBook
         show={page === 'add'}
         setError = {handleError}
+        errorM = {error}
       />
 
     </div>
