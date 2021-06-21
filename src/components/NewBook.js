@@ -28,7 +28,6 @@ const NewBook = ({show, setError,errorM}) => {
       setError(error.networkError.message)
     }
   })
-  console.log({errorM})
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
@@ -44,6 +43,11 @@ const NewBook = ({show, setError,errorM}) => {
     
     addBook({variables:{title:title? title : null, author, published:parseInt(published,10),genres:genres.concat(genre)}})
 
+    setTitle('')
+    setPublished('')
+    setAuthor('')
+    setGenres([])
+    setGenre('')
   }
 
   const addGenre = () => {

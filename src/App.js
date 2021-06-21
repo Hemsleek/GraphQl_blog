@@ -10,9 +10,9 @@ const App = () => {
 
   const handleError = (message) => {
     setError(message)
-    setTimeout((
+    setTimeout(() => {
         setError(null)
-    )
+    }
     ,5000)
   }
 
