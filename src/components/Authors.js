@@ -74,15 +74,21 @@ const updateAuthor = async (event) => {
           )}
         </tbody>
       </table>
-
+      
     </div>
     <form onSubmit={updateAuthor}>
        <div>
           Name
-          <input
-            value={name}
-            onChange={({ target }) => setName(target.value)}
-          />
+          <select onChange={({ target }) => setName(target.value)}>
+            <option value="none">Select</option>
+            {
+              result.data.allAuthors.map( a => (
+                <option value={a.name}>
+                  {a.name}
+                </option>
+              ))
+            }
+          </select>
         </div>
         <div>
           Born
