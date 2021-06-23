@@ -80,7 +80,7 @@ const updateAuthor = async (event) => {
        <div>
           Name
           <select onChange={({ target }) => setName(target.value)}>
-            <option value="none">Select</option>
+            <option value="none" disabled selected>Select</option>
             {
               result.data.allAuthors.map( a => (
                 <option value={a.name}>
