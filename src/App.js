@@ -5,6 +5,7 @@ import NewBook from './components/NewBook'
 import Notify from './components/Notify'
 
 const App = () => {
+  const [token , setToken] = useState(null)
   const [page, setPage] = useState('authors')
   const [error , setError]= useState(null)
 
@@ -14,6 +15,26 @@ const App = () => {
         setError(null)
     }
     ,5000)
+  }
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const username = e.target.username
+    const password = e.target.password
+    
+
+  }
+
+  if(!token) {
+    return (
+      <div>
+          <Notify message={error} />
+          <form onSubmit ={handleLogin}> 
+            <input type="text" name="username" />
+            <inpt  type="text"  name="password" />
+            <button>LOGIN</button>
+          </form>
+      </div>
+    )
   }
 
   return (
