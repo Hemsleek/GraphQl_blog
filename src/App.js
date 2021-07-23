@@ -3,7 +3,7 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Notify from './components/Notify'
-import {gql, useQuery } from '@apollo/client'
+import {gql, useMutation } from '@apollo/client'
 
 export const LOGIN = gql`
   mutation login($username:String!, $password:String!){
@@ -14,13 +14,22 @@ export const LOGIN = gql`
 `
 
 const App = () => {
-  const [login , result] = useQuery(LOGIN)
   const [token , setToken] = useState(null)
   const [page, setPage] = useState('authors')
   const [error , setError]= useState(null)
 
+  const [login , result] = useMutation(LOGIN,{
+    onError:(error) => {
+      setError(error.graphQLErrors[0].message)
+    }
+  })
+
   useEffect(() => {
-   
+    if(result.data){
+      const token  = result.data.login.value
+      setToken(token)
+      localStorage.setItem('user-token', token)
+    }
   }, [result.data])
 
   const handleError = (message) => {
@@ -34,7 +43,7 @@ const App = () => {
     e.preventDefault()
     const username = e.target.username
     const password = e.target.password
-
+    login({variables:{username, password}})
 
   }
 
@@ -45,7 +54,7 @@ const App = () => {
           <form onSubmit ={handleLogin}> 
             <input type="text" name="username" />
             <inpt  type="text"  name="password" />
-            <button>LOGIN</button>
+            <button type="submit">LOGIN</button>
           </form>
       </div>
     )
