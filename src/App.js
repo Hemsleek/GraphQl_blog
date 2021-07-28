@@ -13,6 +13,20 @@ export const LOGIN = gql`
   }
 `
 
+const LoginForm = (show) => {
+  if(!show) return null
+  return (
+    <div>
+        {/* <Notify message={error} /> */}
+        <form onSubmit ={handleLogin}> 
+          <input type="text" name="username" />
+          <inpt  type="text"  name="password" />
+          <button type="submit">LOGIN</button>
+        </form>
+    </div>
+  )
+}
+
 const App = () => {
   const [token , setToken] = useState(null)
   const [page, setPage] = useState('authors')
@@ -47,18 +61,7 @@ const App = () => {
 
   }
 
-  if(!token) {
-    return (
-      <div>
-          <Notify message={error} />
-          <form onSubmit ={handleLogin}> 
-            <input type="text" name="username" />
-            <inpt  type="text"  name="password" />
-            <button type="submit">LOGIN</button>
-          </form>
-      </div>
-    )
-  }
+ 
 
   return (
     <div>
@@ -66,6 +69,7 @@ const App = () => {
       <div>
         <button onClick={() => setPage('authors')}>Authors</button>
         <button onClick={() => setPage('books')}>Books</button>
+        <button onClick={() => setPage('login')}>Login</button>
         <button onClick={() => setPage('add')}>Add Book</button>
       </div>
 
@@ -82,6 +86,7 @@ const App = () => {
         setError = {handleError}
         errorM = {error}
       />
+      <LoginForm show={page==="login"} />
 
     </div>
   )
