@@ -3,7 +3,8 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Notify from './components/Notify'
-import {gql, useMutation } from '@apollo/client'
+import LoginForm from './components/LoginForm'
+import { gql, useMutation } from '@apollo/client'
 
 export const LOGIN = gql`
   mutation login($username:String!, $password:String!){
@@ -13,55 +14,41 @@ export const LOGIN = gql`
   }
 `
 
-const LoginForm = (show) => {
-  if(!show) return null
-  return (
-    <div>
-        {/* <Notify message={error} /> */}
-        <form onSubmit ={handleLogin}> 
-          <input type="text" name="username" />
-          <inpt  type="text"  name="password" />
-          <button type="submit">LOGIN</button>
-        </form>
-    </div>
-  )
-}
-
 const App = () => {
-  const [token , setToken] = useState(null)
+  const [token, setToken] = useState(null)
   const [page, setPage] = useState('authors')
-  const [error , setError]= useState(null)
+  const [error, setError] = useState(null)
 
-  const [login , result] = useMutation(LOGIN,{
-    onError:(error) => {
+  const [login, result] = useMutation(LOGIN, {
+    onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
   })
 
   useEffect(() => {
-    if(result.data){
-      const token  = result.data.login.value
-      setToken(token)
-      localStorage.setItem('user-token', token)
+    if (result.data) {
+      const freshToken = result.data.login.value
+      setToken(freshToken)
+      localStorage.setItem('user-token', freshToken)
     }
   }, [result.data])
 
   const handleError = (message) => {
     setError(message)
     setTimeout(() => {
-        setError(null)
+      setError(null)
     }
-    ,5000)
+      , 5000)
   }
   const handleLogin = (e) => {
     e.preventDefault()
     const username = e.target.username
     const password = e.target.password
-    login({variables:{username, password}})
+    login({ variables: { username, password } })
 
   }
 
- 
+
 
   return (
     <div>
@@ -69,8 +56,15 @@ const App = () => {
       <div>
         <button onClick={() => setPage('authors')}>Authors</button>
         <button onClick={() => setPage('books')}>Books</button>
-        <button onClick={() => setPage('login')}>Login</button>
-        <button onClick={() => setPage('add')}>Add Book</button>
+        {
+          token ?
+            <button onClick={() => setPage('login')}>Login</button>
+            :
+          <>
+          <button onClick={() => setPage('add')}>Add Book</button>
+          <button onClick={() => {localStorage.removeItem('user-token');setToken(null)}}>Logout</button>
+          </>
+        }
       </div>
 
       <Authors
@@ -86,10 +80,10 @@ const App = () => {
         setError = {handleError}
         errorM = {error}
       />
-      <LoginForm show={page==="login"} />
+      <LoginForm show={page==="login"} handleLogin={handleLogin} />
 
     </div>
-  )
+      )
 }
 
-export default App
+      export default App
