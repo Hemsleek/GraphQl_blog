@@ -1,5 +1,6 @@
 import React from 'react'
 import {useQuery, gql} from '@apollo/client'
+import { getTypenameFromResult } from '@apollo/client/utilities'
 
 
 export const ALL_BOOKS = gql`
@@ -47,6 +48,14 @@ const Books = (props) => {
           )}
         </tbody>
       </table>
+      {
+        props.genres.map( (genre, genreIndex) => (
+          <span key={`app-genre-list-no${genreIndex}`}>
+            {genre}
+          </span>
+        ))
+      }
+
     </div>
   )
 }

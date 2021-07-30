@@ -18,6 +18,8 @@ const App = () => {
   const [token, setToken] = useState(null)
   const [page, setPage] = useState('authors')
   const [error, setError] = useState(null)
+  const [genres, setGenres] = useState([])
+
 
   const [login, result] = useMutation(LOGIN, {
     onError: (error) => {
@@ -73,9 +75,12 @@ const App = () => {
 
       <Books
         show={page === 'books'}
+        genres={genres}
       />
 
       <NewBook
+        genres = {genres}
+        setGenres={setGenres}
         show={page === 'add'}
         setError = {handleError}
         errorM = {error}
