@@ -64,6 +64,7 @@ const App = () => {
             :
           <>
           <button onClick={() => setPage('add')}>Add Book</button>
+          <button onClick={() => setPage('recommended')}>Recommmend</button>
           <button onClick={() => {localStorage.removeItem('user-token');setToken(null)}}>Logout</button>
           </>
         }
@@ -86,6 +87,17 @@ const App = () => {
         errorM = {error}
       />
       <LoginForm show={page==="login"} handleLogin={handleLogin} />
+
+      {page === "recommend" && (
+        <div>
+          <span>Recommendations</span>
+          <p>Books in your favourite genre patterns</p>
+          <table>
+            <th></th>
+            <tbody></tbody>
+          </table>
+        </div>
+      )}
 
     </div>
       )
