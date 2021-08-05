@@ -62,11 +62,11 @@ const App = () => {
           token ?
             <button onClick={() => setPage('login')}>Login</button>
             :
-          <>
-          <button onClick={() => setPage('add')}>Add Book</button>
-          <button onClick={() => setPage('recommended')}>Recommmend</button>
-          <button onClick={() => {localStorage.removeItem('user-token');setToken(null)}}>Logout</button>
-          </>
+            <>
+              <button onClick={() => setPage('add')}>Add Book</button>
+              <button onClick={() => setPage('recommended')}>Recommmend</button>
+              <button onClick={() => { localStorage.removeItem('user-token'); setToken(null) }}>Logout</button>
+            </>
         }
       </div>
 
@@ -80,27 +80,35 @@ const App = () => {
       />
 
       <NewBook
-        genres = {genres}
+        genres={genres}
         setGenres={setGenres}
         show={page === 'add'}
-        setError = {handleError}
-        errorM = {error}
+        setError={handleError}
+        errorM={error}
       />
-      <LoginForm show={page==="login"} handleLogin={handleLogin} />
+      <LoginForm show={page === "login"} handleLogin={handleLogin} />
 
       {page === "recommend" && (
         <div>
           <span>Recommendations</span>
           <p>Books in your favourite genre patterns</p>
           <table>
-            <th></th>
-            <tbody></tbody>
+            <th>
+              <tr>
+                <td>AUthor</td>
+                <td>Published</td>
+              </tr>
+            </th>
+            <tbody>
+
+
+            </tbody>
           </table>
         </div>
       )}
 
     </div>
-      )
+  )
 }
 
-      export default App
+export default App
