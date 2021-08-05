@@ -3,22 +3,7 @@ import { useMutation,gql } from '@apollo/client'
 import {ALL_BOOKS} from './Books'
 
 
-const ADD_BOOK = gql`
-  mutation addBook($title:String!,
-        $published:Int!,
-        $author:String!,
-        $genres:[String]!){
-    addBook(
-      title:$title,
-      published:$published,
-      author:$author,
-      genres:$genres
-    ){
-      title
-      author
-      published
-    }
-  }
+
 `
 const NewBook = ({show, setError,errorM,genres,setGenres}) => {
 
