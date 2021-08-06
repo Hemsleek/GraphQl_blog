@@ -5,14 +5,9 @@ import NewBook from './components/NewBook'
 import Notify from './components/Notify'
 import LoginForm from './components/LoginForm'
 import { gql, useMutation } from '@apollo/client'
+import { LOGIN } from '../queries'
 
-export const LOGIN = gql`
-  mutation login($username:String!, $password:String!){
-    login(username:$username,password:$password){
-        value
-    }
-  }
-`
+
 
 const App = () => {
   const [token, setToken] = useState(null)

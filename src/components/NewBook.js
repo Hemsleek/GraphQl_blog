@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { useMutation,gql } from '@apollo/client'
 import {ALL_BOOKS} from './Books'
+import { ADD_BOOK } from '../../queries'
 
-
-
-`
 const NewBook = ({show, setError,errorM,genres,setGenres}) => {
 
   const [addBook] = useMutation(ADD_BOOK,{
