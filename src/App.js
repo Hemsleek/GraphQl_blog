@@ -95,7 +95,8 @@ const App = () => {
               </tr>
             </th>
             <tbody>
-
+              <td></td>
+              <td></td>
 
             </tbody>
           </table>
