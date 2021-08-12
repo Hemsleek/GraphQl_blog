@@ -1,28 +1,33 @@
-import React from 'react'
-import {useQuery, gql} from '@apollo/client'
-import { getTypenameFromResult } from '@apollo/client/utilities'
+import React,{ useState } from 'react'
+import { useQuery, gql } from '@apollo/client'
 import { ALL_BOOKS } from '../../queries'
 
 
 
 const Books = (props) => {
+  const [selectedGenre, setSelectedGenre] = useState('all genres')
   const result = useQuery(ALL_BOOKS)
+
+  const bookFilter = () => selectedGenre==='all genres'
+    ? result.data.allBooks
+    : result.data.allBooks.filter(book => book.genres.includes(selectedGenre))
+
 
   if (!props.show) {
     return null
   }
 
-  if(result.loading) return (
+  if (result.loading) return (
     <div>Loading...</div>
   )
 
-  
+
   return (
     <div>
       <h2>books</h2>
 
       <table>
-        <tbody>
+        <thead>
           <tr>
             <th>Name</th>
             <th>
@@ -32,7 +37,9 @@ const Books = (props) => {
               Published
             </th>
           </tr>
-          {result.data.allBooks.map(a =>
+        </thead>
+        <tbody>
+          {bookFilter.map(a =>
             <tr key={a.title}>
               <td>{a.title}</td>
               <td>{a.author}</td>
@@ -42,8 +49,8 @@ const Books = (props) => {
         </tbody>
       </table>
       {
-        props.genres.map( (genre, genreIndex) => (
-          <span key={`app-genre-list-no${genreIndex}`}>
+        props.genres.map((genre, genreIndex) => (
+          <span onClick={() =>  setSelectedGenre()} key={`app-genre-list-no${genreIndex}`}>
             {genre}
           </span>
         ))
