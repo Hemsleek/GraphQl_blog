@@ -50,7 +50,7 @@ const Books = (props) => {
       </table>
       {
         props.genres.map((genre, genreIndex) => (
-          <span onClick={() =>  setSelectedGenre()} key={`app-genre-list-no${genreIndex}`}>
+          <span style={{borderRadius:'10px' padding:"1rem"}} onClick={() =>  setSelectedGenre()} key={`app-genre-list-no${genreIndex}`}>
             {genre}
           </span>
         ))
