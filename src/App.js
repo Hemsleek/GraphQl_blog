@@ -4,8 +4,8 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Notify from './components/Notify'
 import LoginForm from './components/LoginForm'
-import { gql, useMutation } from '@apollo/client'
-import { LOGIN } from '../queries'
+import { useMutation } from '@apollo/client'
+import { LOGIN } from './queries'
 
 
 

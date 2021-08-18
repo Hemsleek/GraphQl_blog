@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import {useQuery, gql, useMutation} from '@apollo/client'
-import { ALL_AUTHORS, EDIT_AUTHOR } from '../../queries'
+import {useQuery, useMutation} from '@apollo/client'
+import { ALL_AUTHORS, EDIT_AUTHOR } from '../queries'
 
 
 
