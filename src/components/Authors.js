@@ -16,7 +16,7 @@ const  Authors = (props) => {
   if (!props.show) {
     return null
   }
-  
+  console.log({result})
   
   if(result.loading) return (
   <div>
@@ -62,8 +62,8 @@ const updateAuthor = async (event) => {
     <form onSubmit={updateAuthor}>
        <div>
           Name
-          <select onChange={({ target }) => setName(target.value)}>
-            <option value="none" disabled selected>Select</option>
+          <select defaultValue="none" onChange={({ target }) => setName(target.value)}>
+            <option value="none" disabled>Select</option>
             {
               result.data.allAuthors.map( a => (
                 <option value={a.name}>
