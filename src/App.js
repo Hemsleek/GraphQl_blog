@@ -13,7 +13,7 @@ const App = () => {
   const [token, setToken] = useState(null)
   const [page, setPage] = useState('authors')
   const [error, setError] = useState(null)
-  const [genres, setGenres] = useState([])
+  // const [genres, setGenres] = useState([])
 
 
   const [login, result] = useMutation(LOGIN, {
